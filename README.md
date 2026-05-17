@@ -1,6 +1,11 @@
 # Ephemeris API
 > Open Swiss Ephemeris REST API
 
+## Download ephemeris files locally
+```bash
+uv run scripts/download_ephe.py
+```
+
 ## Run application
 ### Build Docker image
 ```bash
