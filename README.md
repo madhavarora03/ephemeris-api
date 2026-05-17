@@ -8,5 +8,5 @@ docker build -t ephemeris-api .
 ```
 ### Run Image
 ```bash
-docker run -p 8000:8000 -v $(pwd)/ephe:/app/ephe ephemeris-api:latest
+docker run --rm -p 8000:8000 ephemeris-api:latest
 ```
