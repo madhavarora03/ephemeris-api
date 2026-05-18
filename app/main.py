@@ -1,26 +1,20 @@
-from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 
 import swisseph as swe
-from fastapi import FastAPI
 
-from app.config import get_settings
-from app.routes import router
+if __name__ == "__main__":
+    swe.set_ephe_path("./ephe")
+    now = datetime.now(timezone.utc)
 
-settings = get_settings()
+    jd_ut, jd_tt = swe.utc_to_jd(
+        now.year,
+        now.month,
+        now.day,
+        now.hour,
+        now.minute,
+        now.second + now.microsecond / 1000000.0,
+    )
 
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    swe.set_ephe_path(settings.EPHE_PATH)
-    yield
-    swe.close()
-
-
-app = FastAPI(
-    title=settings.APP_TITLE,
-    description=settings.APP_DESCRIPTION,
-    version=settings.APP_VERSION,
-    lifespan=lifespan,
-)
-
-app.include_router(router=router)
+    coords, flags, _ = swe.calc_ut(jd_tt, swe.SUN)
+    longitude = coords[0]
+    print(f"Sun longitude: {longitude}")

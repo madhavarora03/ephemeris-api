@@ -1,10 +1,9 @@
 [project]
-name = "ephemeris-api"
+name = "ephemeris-engine"
 version = "0.1.0"
-description = "Open Swiss Ephemeris REST API"
+description = "IPC-native Swiss Ephemeris computation engine"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "fastapi[standard-no-fastapi-cloud-cli]>=0.136.1",
     "pysweph>=2.10.3.6",
 ]
