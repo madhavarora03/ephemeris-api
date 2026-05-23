@@ -15,6 +15,10 @@ if __name__ == "__main__":
         now.second + now.microsecond / 1000000.0,
     )
 
-    coords, flags, _ = swe.calc_ut(jd_tt, swe.SUN)
+    coords, flags, serr = swe.calc_ut(jd_ut, swe.SUN)
+
+    if serr:
+        print(f"Warning: {serr}")
+
     longitude = coords[0]
     print(f"Sun longitude: {longitude}")
