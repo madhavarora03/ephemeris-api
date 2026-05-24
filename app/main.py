@@ -2,10 +2,11 @@ from datetime import datetime, timezone
 
 import swisseph as swe
 
-from app.core.config import config
+from app.core.engine_setup import init_engine
 
 if __name__ == "__main__":
-    swe.set_ephe_path(str(config.ephe_path))
+    init_engine()
+
     now = datetime.now(timezone.utc)
 
     jd_ut, jd_tt = swe.utc_to_jd(
